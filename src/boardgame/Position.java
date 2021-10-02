@@ -1,11 +1,10 @@
 package boardgame;
 
 public class Position {
-	// essa classe define as posições do tabuleiro
+
 	private int row;
 	private int column;
-
-	// será possível passar a linha e a coluna no construtor do objeto
+	
 	public Position(int row, int column) {
 		this.row = row;
 		this.column = column;
