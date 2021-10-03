@@ -10,6 +10,5 @@ public class Program {
 		ChessMatch chessMatch = new ChessMatch();
 		// vou ter um método responsável por determinar como a matriz de peças da partida será mostrada como interface
 		UI.printBoard(chessMatch.getPieces());
-
 	}
 }

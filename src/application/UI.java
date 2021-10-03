@@ -1,11 +1,12 @@
 package application;
 
+import boardgame.Piece;
 import chess.ChessPiece;
 
 public class UI {
 
     // criando o método que msotrar o tabuleiro na interface
-    public static void printBoard(ChessPiece[][] pieces) {
+    public static void printBoard(Piece[][] pieces) {
         for (int i = 0; i < pieces.length; i++) {
             System.out.print((8 - i) + " ");
 
@@ -18,7 +19,7 @@ public class UI {
     }
 
     // método auxiliar que imprime uma peça
-    private static void printPiece(ChessPiece piece) {
+    private static void printPiece(Piece piece) {
         // imprimindo cada peça sendo um traço e entre elas tendo espaço
         if (piece == null) {
             System.out.print("-");
