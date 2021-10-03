@@ -35,11 +35,28 @@ public class Board {
 	public Piece piece(Position position) {
 		return pieces[position.getRow()][position.getColumn()];
 	}
-
+	
 	public void placePiece(Piece piece, Position position) {
-		// passando uma peça e a posição à levá-la como parâmetro, sendo que a peça será atribuida à uma peça nesta posição da matriz de pieces do tabuleiro
 		pieces[position.getRow()][position.getColumn()] = piece;
-		// pense que antes essa peça estava numa posição nula, se agora eu movi ela para uma posição, ela tem a position atual, position é protected
 		piece.position = position;
+	}
+
+	// auxiliar para hora que em positionExists for mais fácil testar pela linha e pela coluna
+	private boolean positionExists(int row, int column) {
+		// lógica referindo se a posição passada existe no tabuleiro, referente à sua quantidade de linhas e colunas
+		return row >= 0 && row < this.rows && column >= 0 && column < this.columns;
+	}
+
+	// verificando se a posição existe
+	public boolean positionExists(Position position) {
+		// se os atributos de position são uma linha e uma coluna, fica mais fácil passá-los como parâmetro para o método auxiliar
+		return positionExists(position.getRow(), position.getColumn());
+	}
+
+	// verificando se há uma peça em determinada posição
+	public boolean thereIsAPiece(Position position) {
+		// testo se a peça que está na posição é igual a null ou não, se for significa que não tem peça lá
+		return this.piece(position) != null;
+
 	}
 }
