@@ -16,6 +16,7 @@ public class UI {
 	}
 	
 	private static void printPiece(ChessPiece piece) {
+		// só printa traço se for null, as peças que forem setadas pelo placePiece() não vão estar nulas, vão estar com objetos do tipo Rook, King... etc
 		if (piece == null) {
 			System.out.print("-");
 		}
