@@ -6,7 +6,7 @@ public class Board {
 	private int columns;
 	private Piece[][] pieces;
 	
-	public Board(int rows, int columns) {
+	public Board(int rows, int columns) throws BoardException {
 		// não faz sentido eu criar um tabuleiro com 0 ou menos lihas/colunas, tem que ter pelo menos 1
 		if (rows < 1 || columns < 1) {
 			throw new BoardException("Error creating board: there must be as least 1 row and 1 column");
@@ -23,16 +23,32 @@ public class Board {
 	public int getColumns() {
 		return columns;
 	}
-	
+
+	// vericiando se a posição existe realmente no tabuleiro antes de prosseguir com a execução das funções que à usa
 	public Piece piece(int row, int column) {
+		if (!positionExists(row, column)) {
+			throw new BoardException("Position doesn't exists on the board");
+		}
 		return pieces[row][column];
 	}
-	
+
+	// vericiando se a posição existe realmente no tabuleiro antes de prosseguir com a execução das funções que à usa
 	public Piece piece(Position position) {
+		if (!positionExists(position)) {
+			throw new BoardException("Position doesn't exists on the board");
+		}
 		return pieces[position.getRow()][position.getColumn()];
 	}
-	
+
+	/*
+		vericiando se a posição existe realmente no tabuleiro antes de prosseguir com a execução das funções que à usa,
+		e verificando se a posição que estou querendo mover uma peça já tem uma peça nela, porém delegando essa segunda
+		verificação dentro do método thereIsAPiece, já que ele também usa a mesma posição
+	*/
 	public void placePiece(Piece piece, Position position) {
+		if (thereIsAPiece(position)) {
+			throw new BoardException("This position already has a piece on it");
+		}
 		pieces[position.getRow()][position.getColumn()] = piece;
 		piece.position = position;
 	}
@@ -51,6 +67,9 @@ public class Board {
 
 	// verificando se há uma peça em determinada posição
 	public boolean thereIsAPiece(Position position) {
+		if (!positionExists(position)) {
+			throw new BoardException("Position doesn't exists on the board");
+		}
 		// testo se a peça que está na posição é igual a null ou não, se for significa que não tem peça lá
 		return this.piece(position) != null;
 
